@@ -26,6 +26,17 @@ export interface LLMProvider {
   ): AsyncIterable<StreamChunk>;
 
   /**
+   * Send a chat message and get a complete response
+   * @param messages - Array of conversation messages
+   * @param systemPrompt - Optional system prompt for context
+   * @returns Promise that resolves to the complete response text
+   */
+  chat(
+    messages: ChatMessage[],
+    systemPrompt?: string
+  ): Promise<string>;
+
+  /**
    * Get provider name
    */
   getName(): string;

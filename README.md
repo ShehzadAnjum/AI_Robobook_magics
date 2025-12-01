@@ -267,7 +267,8 @@ Change the `AI_PROVIDER` environment variable:
 ```env
 AI_PROVIDER=gemini
 GEMINI_API_KEY=your_key
-GEMINI_MODEL=gemini-2.0-flash-exp  # optional
+GEMINI_MODEL=gemini-pro  # optional, default: gemini-pro (stable, widely available)
+# Other options: gemini-2.0-flash, gemini-2.0-flash-exp (if available on your account)
 ```
 
 **For OpenAI:**

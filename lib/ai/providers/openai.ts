@@ -64,4 +64,45 @@ export class OpenAIProvider implements LLMProvider {
       );
     }
   }
+
+  async chat(
+    messages: ChatMessage[],
+    systemPrompt?: string
+  ): Promise<string> {
+    const allMessages: OpenAI.Chat.ChatCompletionMessageParam[] = [];
+
+    if (systemPrompt) {
+      allMessages.push({
+        role: 'system',
+        content: systemPrompt,
+      });
+    }
+
+    allMessages.push(
+      ...messages.map((msg) => ({
+        role: msg.role as 'user' | 'assistant' | 'system',
+        content: msg.content,
+      }))
+    );
+
+    try {
+      const response = await this.client.chat.completions.create({
+        model: this.model,
+        messages: allMessages,
+        stream: false,
+      });
+
+      const content = response.choices[0]?.message?.content;
+      if (!content) {
+        throw new Error('No content in OpenAI response');
+      }
+
+      return content;
+    } catch (error) {
+      console.error('OpenAI chat error:', error);
+      throw new Error(
+        `Failed to get response from OpenAI: ${error instanceof Error ? error.message : 'Unknown error'}`
+      );
+    }
+  }
 }

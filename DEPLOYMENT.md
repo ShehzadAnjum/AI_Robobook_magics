@@ -166,7 +166,7 @@ After deployment, verify:
 | `AI_PROVIDER` | Yes | `gemini` | AI provider: `gemini` or `openai` |
 | `GEMINI_API_KEY` | If using Gemini | - | Google Gemini API key |
 | `OPENAI_API_KEY` | If using OpenAI | - | OpenAI API key |
-| `GEMINI_MODEL` | No | `gemini-2.0-flash-exp` | Gemini model to use |
+| `GEMINI_MODEL` | No | `gemini-pro` | Gemini model to use (gemini-pro, gemini-2.0-flash, etc.) |
 | `OPENAI_MODEL` | No | `gpt-4o-mini` | OpenAI model to use |
 | `BOOK_NAME` | No | `AI & Robotics Book` | Book name for prompts |
 | `BOOK_TOPICS` | No | (see above) | Comma-separated topics |
