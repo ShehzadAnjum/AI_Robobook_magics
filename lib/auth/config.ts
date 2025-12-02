@@ -26,20 +26,14 @@ export const auth = betterAuth({
   // Trusted origins for CORS (cross-domain support)
   trustedOrigins: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3001'],
 
-  // Session configuration for cross-domain cookies
-  session: {
-    cookieCache: {
-      enabled: true,
-      maxAge: 60 * 60 * 24 * 7, // 7 days
-    },
-  },
-
   // Advanced options for cross-domain authentication
   advanced: {
-    crossSubDomainCookies: {
-      enabled: true,
-    },
-    useSecureCookies: true, // Force HTTPS-only cookies
+    // Use secure cookies in production (HTTPS only)
+    useSecureCookies: process.env.NODE_ENV === 'production',
+
+    // CRITICAL: Set SameSite=None for cross-domain cookies
+    // This allows GitHub Pages (github.io) to send cookies to Vercel (vercel.app)
+    cookieSameSite: 'none',
   },
 });
 
