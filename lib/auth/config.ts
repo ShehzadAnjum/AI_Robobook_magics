@@ -28,12 +28,13 @@ export const auth = betterAuth({
 
   // Advanced options for cross-domain authentication
   advanced: {
-    // Use secure cookies in production (HTTPS only)
-    useSecureCookies: process.env.NODE_ENV === 'production',
-
-    // CRITICAL: Set SameSite=None for cross-domain cookies
+    // CRITICAL: Set default cookie attributes for cross-domain authentication
     // This allows GitHub Pages (github.io) to send cookies to Vercel (vercel.app)
-    cookieSameSite: 'none',
+    defaultCookieAttributes: {
+      sameSite: 'none',
+      secure: true,
+      httpOnly: true,
+    },
   },
 });
 
