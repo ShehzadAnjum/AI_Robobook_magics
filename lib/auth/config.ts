@@ -6,9 +6,16 @@ const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
 });
 
-// Minimal better-auth configuration for compatibility with v1.4.4
+// Better-auth configuration with email/password authentication enabled
 export const auth = betterAuth({
   database: pool,
+
+  // Email/Password authentication
+  emailAndPassword: {
+    enabled: true,
+    requireEmailVerification: false, // Temporarily disabled for initial testing
+    minPasswordLength: 8,
+  },
 
   // Base URL for callbacks
   baseURL: process.env.BETTER_AUTH_URL || 'http://localhost:3000',
