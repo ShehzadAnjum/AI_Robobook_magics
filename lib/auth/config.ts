@@ -57,13 +57,7 @@ export const auth = betterAuth({
     storage: 'memory', // Use memory for MVP, upgrade to Redis for production
   },
 
-  // Advanced security - Cookie settings for cross-domain sessions
-  advanced: {
-    cookieSameSite: 'none', // Required for cross-domain (GitHub Pages ↔ Vercel)
-    generateId: undefined, // Use default ID generation
-  },
-
-  // Trusted origins for CORS
+  // Trusted origins for CORS (cross-domain support)
   trustedOrigins: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3001'],
 
   // Base URL for callbacks
