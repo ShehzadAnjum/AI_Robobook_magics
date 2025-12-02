@@ -24,7 +24,10 @@ export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET || '',
 
   // Trusted origins for CORS (cross-domain support)
-  trustedOrigins: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3001'],
+  trustedOrigins: process.env.ALLOWED_ORIGINS?.split(',') || [
+    'http://localhost:3001',
+    'https://shehzadanjum.github.io'
+  ],
 
   // Advanced options for cross-domain authentication
   advanced: {
