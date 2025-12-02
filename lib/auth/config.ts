@@ -57,30 +57,14 @@ export const auth = betterAuth({
     storage: 'memory', // Use memory for MVP, upgrade to Redis for production
   },
 
-  // Advanced security
+  // Advanced security - Cookie settings for cross-domain sessions
   advanced: {
-    // Cross-site request forgery protection
-    csrfProtection: {
-      enabled: true,
-      useDouble: true,
-    },
-
-    // Cross-origin resource sharing
-    cors: {
-      enabled: true,
-      origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3001'],
-      credentials: true,
-    },
-
-    // Cookie settings for cross-domain sessions
-    cookieOptions: {
-      sameSite: 'none', // Required for cross-domain (GitHub Pages ↔ Vercel)
-      secure: process.env.NODE_ENV === 'production', // HTTPS only in production
-      httpOnly: true, // Prevent JavaScript access
-      path: '/',
-      maxAge: Number(process.env.SESSION_REMEMBER_ME_DAYS || 30) * 24 * 60 * 60, // 30 days
-    },
+    cookieSameSite: 'none', // Required for cross-domain (GitHub Pages ↔ Vercel)
+    generateId: undefined, // Use default ID generation
   },
+
+  // Trusted origins for CORS
+  trustedOrigins: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3001'],
 
   // Base URL for callbacks
   baseURL: process.env.BETTER_AUTH_URL || 'http://localhost:3000',
